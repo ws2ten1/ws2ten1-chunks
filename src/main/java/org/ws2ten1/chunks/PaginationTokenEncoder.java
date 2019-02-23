@@ -28,13 +28,14 @@ public interface PaginationTokenEncoder {
 	 * @param firstKey first element key of current chunk
 	 * @param lastKey last element key of current chunk
 	 * @return token pagination token
-	 * @throws InvalidKeyExpressionException
+	 * @throws InvalidKeyExpressionException if failed to process keys
 	 */
 	String encode(Object firstKey, Object lastKey);
 	
 	/**
 	 * Decode pagination token and extract first element key.
 	 *
+	 * @param <T> type of key
 	 * @param paginationToken token
 	 * @param clazz key type
 	 * @return key
@@ -52,6 +53,7 @@ public interface PaginationTokenEncoder {
 	/**
 	 * Decode pagination token and extract last element key.
 	 *
+	 * @param <T> type of key
 	 * @param paginationToken token
 	 * @param clazz key type
 	 * @return key

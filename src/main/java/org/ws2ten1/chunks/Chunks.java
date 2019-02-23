@@ -35,6 +35,7 @@ public class Chunks {
 	/**
 	 * Returns a empty chunk.
 	 *
+	 * @param <T> element type of chunk
 	 * @return Empty chunk
 	 */
 	@SuppressWarnings("unchecked")

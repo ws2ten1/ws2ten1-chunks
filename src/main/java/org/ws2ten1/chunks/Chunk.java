@@ -114,6 +114,7 @@ public interface Chunk<T>extends Collection<T> {
 	/**
 	 * Returns a new {@link Chunk} with the content of the current one mapped by the given {@link Converter}.
 	 *
+	 * @param <S> element type of new chunk
 	 * @param converter must not be {@literal null}.
 	 * @return a new {@link Chunk} with the content of the current one mapped by the given {@link Converter}.
 	 */

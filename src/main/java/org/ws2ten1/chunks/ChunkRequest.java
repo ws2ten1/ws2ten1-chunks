@@ -25,9 +25,6 @@ import org.springframework.data.domain.Sort.Direction;
 
 /**
  * Basic Java Bean implementation of {@code Chunkable}.
- *
- * @since 0.11
- * @author daisuke
  */
 @ToString
 @EqualsAndHashCode
@@ -49,7 +46,7 @@ public class ChunkRequest implements Chunkable {
 	
 	
 	/**
-	 * インスタンスを生成する。
+	 * Create instance.
 	 *
 	 * @param paginationToken the token
 	 */
@@ -58,7 +55,7 @@ public class ChunkRequest implements Chunkable {
 	}
 	
 	/**
-	 * インスタンスを生成する。
+	 * Create instance.
 	 *
 	 * @param maxPageSize max size
 	 */
@@ -67,7 +64,7 @@ public class ChunkRequest implements Chunkable {
 	}
 	
 	/**
-	 * インスタンスを生成する。
+	 * Create instance.
 	 *
 	 * @param paginationToken the token
 	 * @param maxPageSize max size
@@ -77,7 +74,7 @@ public class ChunkRequest implements Chunkable {
 	}
 	
 	/**
-	 * インスタンスを生成する。
+	 * Create instance.
 	 *
 	 * @param direction the sort direction
 	 */
@@ -86,7 +83,7 @@ public class ChunkRequest implements Chunkable {
 	}
 	
 	/**
-	 * インスタンスを生成する。
+	 * Create instance.
 	 *
 	 * @param paginationToken the token
 	 * @param direction the sort direction
@@ -96,7 +93,7 @@ public class ChunkRequest implements Chunkable {
 	}
 	
 	/**
-	 * インスタンスを生成する。
+	 * Create instance.
 	 *
 	 * @param maxPageSize max size
 	 * @param direction the sort direction

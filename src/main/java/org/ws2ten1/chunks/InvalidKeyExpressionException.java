@@ -17,9 +17,6 @@ package org.ws2ten1.chunks;
 
 /**
  * TODO for daisuke
- *
- * @since 0.24
- * @author daisuke
  */
 @SuppressWarnings("serial")
 public class InvalidKeyExpressionException extends RuntimeException {

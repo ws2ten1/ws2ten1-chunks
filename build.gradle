@@ -7,7 +7,7 @@ buildscript {
 	dependencies {
 		classpath "com.diffplug.spotless:spotless-plugin-gradle:$spotlessPluginVersion"
 		classpath "de.thetaphi:forbiddenapis:2.5"
-		classpath "de.aaschmid:gradle-cpd-plugin:1.0"
+		classpath "de.aaschmid:gradle-cpd-plugin:1.2"
 	}
 }
 

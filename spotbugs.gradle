@@ -1,6 +1,36 @@
-spotbugs {
-	toolVersion = "3.1.8"
-	effort = "max"
+buildscript {
+	repositories {
+		jcenter()
+		mavenCentral()
+		maven { url "https://plugins.gradle.org/m2/" }
+	}
+	dependencies {
+		classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:$spotbugsPluginVersion"
+	}
 }
-spotbugsMain.excludeFilter = file("${rootProject.projectDir}/config/spotbugs/excludeFilter.xml")
-spotbugsTest.excludeFilter = file("${rootProject.projectDir}/config/spotbugs/excludeFilter-test.xml")
+
+allprojects {
+	apply plugin: 'com.github.spotbugs'
+
+	repositories {
+		maven { url 'https://plugins.gradle.org/m2/' }
+	}
+
+	spotbugs {
+		toolVersion = "3.1.8"
+		effort = "max"
+	}
+	spotbugsMain.excludeFilter = file("${rootProject.projectDir}/config/spotbugs/excludeFilter.xml")
+	spotbugsTest.excludeFilter = file("${rootProject.projectDir}/config/spotbugs/excludeFilter-test.xml")
+
+	tasks.withType(com.github.spotbugs.SpotBugsTask) {
+		reports {
+			html {
+				enabled = true
+			}
+			xml {
+				enabled = false
+			}
+		}
+	}
+}

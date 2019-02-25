@@ -35,10 +35,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Simple JSON and Base64 URL implementation for {@link PaginationTokenEncoder}.
- *
- * @since 0.24
- * @version $Id$
- * @author daisuke
  */
 @Slf4j
 public class SimplePaginationTokenEncoder implements PaginationTokenEncoder {

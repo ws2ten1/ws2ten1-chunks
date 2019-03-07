@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -111,19 +111,18 @@ public class ChunkImpl<T> implements Chunk<T> {
 	
 	@Override
 	public boolean hasNext() {
-		if (isLast()) {
-			return chunkable.getPaginationRelation() == PaginationRelation.PREV; // TODO
-		} else {
-			return getLastKey() != null;
+		if (isForward()) {
+			return isLast() == false;
 		}
+		return true;
 	}
 	
 	@Override
 	public boolean hasPrev() {
-		if (isFirst() == false && isLast() == false) {
-			return true;
+		if (isForward()) {
+			return isFirst() == false;
 		}
-		return getFirstKey() != null && Objects.equals(getFirstKey(), getLastKey()) == false && isFirst() == false;
+		return hasContent();
 	}
 	
 	@Override
@@ -137,7 +136,7 @@ public class ChunkImpl<T> implements Chunk<T> {
 	
 	@Override
 	public boolean isFirst() {
-		return /*getFirstKey() == null && */chunkable.getPaginationToken() == null;
+		return chunkable.getPaginationToken() == null;
 	}
 	
 	@Override
@@ -163,12 +162,10 @@ public class ChunkImpl<T> implements Chunk<T> {
 		return new ChunkImpl<>(getConvertedContent(converter), paginationToken, chunkable);
 	}
 	
-	private String getLastKey() {
-		return encoder.extractLastKey(paginationToken).orElse(null);
-	}
-	
-	private String getFirstKey() {
-		return encoder.extractFirstKey(paginationToken).orElse(null);
+	private boolean isForward() {
+		return Optional.ofNullable(chunkable.getPaginationRelation())
+			.map(PaginationRelation.NEXT::equals)
+			.orElse(true);
 	}
 	
 	/**

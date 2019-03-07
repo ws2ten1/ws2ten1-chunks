@@ -33,7 +33,7 @@ public class ChunkingTest {
 	
 	@Test
 	public void testChunkASC_Under26() {
-		// ASC chunk1 first
+		// ASC chunk1 by first
 		Chunkable request = new ChunkRequest(10, Direction.ASC);
 		assertThat(request.getPaginationToken()).isNull();
 		assertThat(request.getPaginationRelation()).isNull();
@@ -49,7 +49,7 @@ public class ChunkingTest {
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
-		// ASC chunk2 next
+		// ASC chunk2 by next from chank1
 		request = chunk.nextChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.NEXT);
@@ -65,7 +65,7 @@ public class ChunkingTest {
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
-		// ASC chunk3 next
+		// ASC chunk3 by next from chunk2
 		request = chunk.nextChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.NEXT);
@@ -81,7 +81,7 @@ public class ChunkingTest {
 		assertThat(chunk.hasNext()).isFalse();
 		assertThat(chunk.nextChunkable()).isNull();
 		
-		// ASC chunk2 prev
+		// ASC chunk2 by prev from chunk3
 		request = chunk.prevChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.PREV);
@@ -97,7 +97,7 @@ public class ChunkingTest {
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
-		// ASC chunk1 prev
+		// ASC chunk1 by prev from chunk2
 		request = chunk.prevChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.PREV);
@@ -113,7 +113,7 @@ public class ChunkingTest {
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
-		// ASC chunk0 prev
+		// ASC chunk0 by prev from chunk1
 		request = chunk.prevChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.PREV);
@@ -129,7 +129,7 @@ public class ChunkingTest {
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
-		// ASC chunk1 next
+		// ASC chunk1 by next from chunk0
 		request = chunk.nextChunkable();
 		assertThat(request.getPaginationToken()).isNotNull();
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.NEXT);
@@ -148,7 +148,7 @@ public class ChunkingTest {
 	
 	@Test
 	public void testChunkASC_Exact26() {
-		// ASC chunk1 first
+		// ASC chunk1 by first
 		Chunkable request = new ChunkRequest(26, Direction.ASC);
 		assertThat(request.getPaginationToken()).isNull();
 		assertThat(request.getPaginationRelation()).isNull();
@@ -164,11 +164,34 @@ public class ChunkingTest {
 		assertThat(chunk.prevChunkable()).isNull();
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
+		
+		// ASC chunk2 by next from chunk1
+		request = chunk.nextChunkable();
+		chunk = repo.findAll(request);
+		assertThat(chunk.getContent()).isEmpty();
+		assertThat(chunk.isFirst()).isFalse();
+		assertThat(chunk.isLast()).isTrue();
+		assertThat(chunk.hasPrev()).isTrue();
+		assertThat(chunk.prevChunkable()).isNotNull();
+		assertThat(chunk.hasNext()).isFalse();
+		assertThat(chunk.nextChunkable()).isNull();
+		
+		// ASC chunk1 by prev from chunk2
+		request = chunk.prevChunkable();
+		chunk = repo.findAll(request);
+		assertThat(chunk.getContent()).containsExactly("aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj",
+				"kk", "ll", "mm", "nn", "oo", "pp", "qq", "rr", "ss", "tt", "uu", "vv", "ww", "xx", "yy", "zz");
+		assertThat(chunk.isFirst()).isFalse();
+		assertThat(chunk.isLast()).isFalse();
+		assertThat(chunk.hasPrev()).isTrue();
+		assertThat(chunk.prevChunkable()).isNotNull();
+		assertThat(chunk.hasNext()).isTrue();
+		assertThat(chunk.nextChunkable()).isNotNull();
 	}
 	
 	@Test
 	public void testChunkASC_Over26() {
-		// ASC chunk1 first
+		// ASC chunk1 by first
 		Chunkable request = new ChunkRequest(30, Direction.ASC);
 		assertThat(request.getPaginationToken()).isNull();
 		assertThat(request.getPaginationRelation()).isNull();
@@ -188,7 +211,7 @@ public class ChunkingTest {
 	
 	@Test
 	public void testChunkDESC_Under26() {
-		// DESC chunk1 first
+		// DESC chunk1 by first
 		Chunkable request = new ChunkRequest(10, Direction.DESC);
 		assertThat(request.getPaginationToken()).isNull();
 		assertThat(request.getPaginationRelation()).isNull();
@@ -204,7 +227,7 @@ public class ChunkingTest {
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
-		// DESC chunk2 next
+		// DESC chunk2 by next from chunk1
 		request = chunk.nextChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.NEXT);
@@ -220,7 +243,7 @@ public class ChunkingTest {
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
-		// DESC chunk3 next
+		// DESC chunk3 by next from chunk2
 		request = chunk.nextChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.NEXT);
@@ -236,7 +259,7 @@ public class ChunkingTest {
 		assertThat(chunk.hasNext()).isFalse();
 		assertThat(chunk.nextChunkable()).isNull();
 		
-		// DESC chunk2 prev
+		// DESC chunk2 by prev from chunk3
 		request = chunk.prevChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.PREV);
@@ -252,7 +275,7 @@ public class ChunkingTest {
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
-		// DESC chunk1 prev
+		// DESC chunk1 by prev from chunk2
 		request = chunk.prevChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.PREV);
@@ -268,7 +291,7 @@ public class ChunkingTest {
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
-		// DESC chunk0 prev
+		// DESC chunk0 by prev from chunk1
 		request = chunk.prevChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.PREV);
@@ -284,7 +307,7 @@ public class ChunkingTest {
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
-		// ASC chunk1 next
+		// ASC chunk1 by next from chunk0
 		request = chunk.nextChunkable();
 		assertThat(request.getPaginationToken()).isNotNull();
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.NEXT);
@@ -303,7 +326,7 @@ public class ChunkingTest {
 	
 	@Test
 	public void testChunkDESC_Exact26() {
-		// ASC chunk1 first
+		// DESC chunk1 by first
 		Chunkable request = new ChunkRequest(26, Direction.DESC);
 		assertThat(request.getPaginationToken()).isNull();
 		assertThat(request.getPaginationRelation()).isNull();
@@ -319,11 +342,34 @@ public class ChunkingTest {
 		assertThat(chunk.prevChunkable()).isNull();
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
+		
+		// DESC chunk2 by next from chunk1
+		request = chunk.nextChunkable();
+		chunk = repo.findAll(request);
+		assertThat(chunk.getContent()).isEmpty();
+		assertThat(chunk.isFirst()).isFalse();
+		assertThat(chunk.isLast()).isTrue();
+		assertThat(chunk.hasPrev()).isTrue();
+		assertThat(chunk.prevChunkable()).isNotNull();
+		assertThat(chunk.hasNext()).isFalse();
+		assertThat(chunk.nextChunkable()).isNull();
+		
+		// DESC chunk1 bty perv from chunk2
+		request = chunk.prevChunkable();
+		chunk = repo.findAll(request);
+		assertThat(chunk.getContent()).containsExactly("zz", "yy", "xx", "ww", "vv", "uu", "tt", "ss", "rr", "qq",
+				"pp", "oo", "nn", "mm", "ll", "kk", "jj", "ii", "hh", "gg", "ff", "ee", "dd", "cc", "bb", "aa");
+		assertThat(chunk.isFirst()).isFalse();
+		assertThat(chunk.isLast()).isFalse();
+		assertThat(chunk.hasPrev()).isTrue();
+		assertThat(chunk.prevChunkable()).isNotNull();
+		assertThat(chunk.hasNext()).isTrue();
+		assertThat(chunk.nextChunkable()).isNotNull();
 	}
 	
 	@Test
 	public void testChunkDESC_Over26() {
-		// ASC chunk1 first
+		// ASC chunk1 by first
 		Chunkable request = new ChunkRequest(30, Direction.DESC);
 		assertThat(request.getPaginationToken()).isNull();
 		assertThat(request.getPaginationRelation()).isNull();

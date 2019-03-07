@@ -34,10 +34,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.util.Assert;
 
-import org.ws2ten1.chunks.Chunkable.PaginationRelation;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import org.ws2ten1.chunks.Chunkable.PaginationRelation;
 
 /**
  * Default information of {@link Chunk}.

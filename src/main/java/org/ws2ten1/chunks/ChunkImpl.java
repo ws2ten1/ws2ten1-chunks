@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -110,12 +111,19 @@ public class ChunkImpl<T> implements Chunk<T> {
 	
 	@Override
 	public boolean hasNext() {
-		return getLastKey() != null && isLast() == false;
+		if (isLast()) {
+			return chunkable.getPaginationRelation() == PaginationRelation.PREV; // TODO
+		} else {
+			return getLastKey() != null;
+		}
 	}
 	
 	@Override
 	public boolean hasPrev() {
-		return getFirstKey() != null && isFirst() == false;
+		if (isFirst() == false && isLast() == false) {
+			return true;
+		}
+		return getFirstKey() != null && Objects.equals(getFirstKey(), getLastKey()) == false && isFirst() == false;
 	}
 	
 	@Override
@@ -129,7 +137,7 @@ public class ChunkImpl<T> implements Chunk<T> {
 	
 	@Override
 	public boolean isFirst() {
-		return getFirstKey() == null;
+		return /*getFirstKey() == null && */chunkable.getPaginationToken() == null;
 	}
 	
 	@Override

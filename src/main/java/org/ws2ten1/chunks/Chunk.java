@@ -80,9 +80,9 @@ public interface Chunk<T>extends Collection<T> {
 	boolean hasPrev();
 	
 	/**
-	 * Returns whether the current {@link Chunk} is the last one.
+	 * Returns whether the current {@link Chunk} is the last one in current pagination relation.
 	 *
-	 * @return {@code true} if this chunk is the last one
+	 * @return {@code true} if this chunk is the last one in current pagination relation
 	 */
 	boolean isLast();
 	

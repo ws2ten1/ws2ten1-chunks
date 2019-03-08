@@ -118,7 +118,7 @@ public class ChunkImpl<T> implements Chunk<T> {
 	}
 	
 	@Override
-	public boolean hasPrev() {
+	public boolean hasPrevious() {
 		if (isForward()) {
 			return isFirst() == false;
 		}
@@ -149,8 +149,8 @@ public class ChunkImpl<T> implements Chunk<T> {
 	}
 	
 	@Override
-	public Chunkable prevChunkable() {
-		if (hasPrev() == false) {
+	public Chunkable previousChunkable() {
+		if (hasPrevious() == false) {
 			return null;
 		}
 		return new ChunkRequest(paginationToken, PaginationRelation.PREV,

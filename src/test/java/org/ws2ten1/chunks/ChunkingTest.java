@@ -44,8 +44,8 @@ public class ChunkingTest {
 		assertThat(chunk.getContent()).containsExactly("aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj");
 		assertThat(chunk.isFirst()).isTrue();
 		assertThat(chunk.isLast()).isFalse();
-		assertThat(chunk.hasPrev()).isFalse();
-		assertThat(chunk.prevChunkable()).isNull();
+		assertThat(chunk.hasPrevious()).isFalse();
+		assertThat(chunk.previousChunkable()).isNull();
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
@@ -60,8 +60,8 @@ public class ChunkingTest {
 		assertThat(chunk.getContent()).containsExactly("kk", "ll", "mm", "nn", "oo", "pp", "qq", "rr", "ss", "tt");
 		assertThat(chunk.isFirst()).isFalse();
 		assertThat(chunk.isLast()).isFalse();
-		assertThat(chunk.hasPrev()).isTrue();
-		assertThat(chunk.prevChunkable()).isNotNull();
+		assertThat(chunk.hasPrevious()).isTrue();
+		assertThat(chunk.previousChunkable()).isNotNull();
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
@@ -76,13 +76,13 @@ public class ChunkingTest {
 		assertThat(chunk.getContent()).containsExactly("uu", "vv", "ww", "xx", "yy", "zz");
 		assertThat(chunk.isFirst()).isFalse();
 		assertThat(chunk.isLast()).isTrue();
-		assertThat(chunk.hasPrev()).isTrue();
-		assertThat(chunk.prevChunkable()).isNotNull();
+		assertThat(chunk.hasPrevious()).isTrue();
+		assertThat(chunk.previousChunkable()).isNotNull();
 		assertThat(chunk.hasNext()).isFalse();
 		assertThat(chunk.nextChunkable()).isNull();
 		
 		// ASC chunk2 prev
-		request = chunk.prevChunkable();
+		request = chunk.previousChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.PREV);
 		assertThat(request.getMaxPageSize()).isEqualTo(10);
@@ -92,13 +92,13 @@ public class ChunkingTest {
 		assertThat(chunk.getContent()).containsExactly("kk", "ll", "mm", "nn", "oo", "pp", "qq", "rr", "ss", "tt");
 		assertThat(chunk.isFirst()).isFalse();
 		assertThat(chunk.isLast()).isFalse();
-		assertThat(chunk.hasPrev()).isTrue();
-		assertThat(chunk.prevChunkable()).isNotNull();
+		assertThat(chunk.hasPrevious()).isTrue();
+		assertThat(chunk.previousChunkable()).isNotNull();
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
 		// ASC chunk1 prev
-		request = chunk.prevChunkable();
+		request = chunk.previousChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.PREV);
 		assertThat(request.getMaxPageSize()).isEqualTo(10);
@@ -108,13 +108,13 @@ public class ChunkingTest {
 		assertThat(chunk.getContent()).containsExactly("aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj");
 		assertThat(chunk.isFirst()).isFalse(); // unknown
 		assertThat(chunk.isLast()).isFalse();
-		assertThat(chunk.hasPrev()).isTrue(); // unknown
-		assertThat(chunk.prevChunkable()).isNotNull();
+		assertThat(chunk.hasPrevious()).isTrue(); // unknown
+		assertThat(chunk.previousChunkable()).isNotNull();
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
 		// ASC chunk0 prev
-		request = chunk.prevChunkable();
+		request = chunk.previousChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.PREV);
 		assertThat(request.getMaxPageSize()).isEqualTo(10);
@@ -124,8 +124,8 @@ public class ChunkingTest {
 		assertThat(chunk.getContent()).isEmpty();
 		assertThat(chunk.isFirst()).isFalse();
 		assertThat(chunk.isLast()).isTrue();
-		assertThat(chunk.hasPrev()).isFalse();
-		assertThat(chunk.prevChunkable()).isNull();
+		assertThat(chunk.hasPrevious()).isFalse();
+		assertThat(chunk.previousChunkable()).isNull();
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
@@ -140,8 +140,8 @@ public class ChunkingTest {
 		assertThat(chunk.getContent()).containsExactly("aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj");
 		assertThat(chunk.isFirst()).isFalse();
 		assertThat(chunk.isLast()).isFalse();
-		assertThat(chunk.hasPrev()).isTrue();
-		assertThat(chunk.prevChunkable()).isNotNull();
+		assertThat(chunk.hasPrevious()).isTrue();
+		assertThat(chunk.previousChunkable()).isNotNull();
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 	}
@@ -160,8 +160,8 @@ public class ChunkingTest {
 				"kk", "ll", "mm", "nn", "oo", "pp", "qq", "rr", "ss", "tt", "uu", "vv", "ww", "xx", "yy", "zz");
 		assertThat(chunk.isFirst()).isTrue();
 		assertThat(chunk.isLast()).isFalse();
-		assertThat(chunk.hasPrev()).isFalse();
-		assertThat(chunk.prevChunkable()).isNull();
+		assertThat(chunk.hasPrevious()).isFalse();
+		assertThat(chunk.previousChunkable()).isNull();
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 	}
@@ -180,8 +180,8 @@ public class ChunkingTest {
 				"kk", "ll", "mm", "nn", "oo", "pp", "qq", "rr", "ss", "tt", "uu", "vv", "ww", "xx", "yy", "zz");
 		assertThat(chunk.isFirst()).isTrue();
 		assertThat(chunk.isLast()).isTrue();
-		assertThat(chunk.hasPrev()).isFalse();
-		assertThat(chunk.prevChunkable()).isNull();
+		assertThat(chunk.hasPrevious()).isFalse();
+		assertThat(chunk.previousChunkable()).isNull();
 		assertThat(chunk.hasNext()).isFalse();
 		assertThat(chunk.nextChunkable()).isNull();
 	}
@@ -199,8 +199,8 @@ public class ChunkingTest {
 		assertThat(chunk.getContent()).containsExactly("zz", "yy", "xx", "ww", "vv", "uu", "tt", "ss", "rr", "qq");
 		assertThat(chunk.isFirst()).isTrue();
 		assertThat(chunk.isLast()).isFalse();
-		assertThat(chunk.hasPrev()).isFalse();
-		assertThat(chunk.prevChunkable()).isNull();
+		assertThat(chunk.hasPrevious()).isFalse();
+		assertThat(chunk.previousChunkable()).isNull();
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
@@ -215,8 +215,8 @@ public class ChunkingTest {
 		assertThat(chunk.getContent()).containsExactly("pp", "oo", "nn", "mm", "ll", "kk", "jj", "ii", "hh", "gg");
 		assertThat(chunk.isFirst()).isFalse();
 		assertThat(chunk.isLast()).isFalse();
-		assertThat(chunk.hasPrev()).isTrue();
-		assertThat(chunk.prevChunkable()).isNotNull();
+		assertThat(chunk.hasPrevious()).isTrue();
+		assertThat(chunk.previousChunkable()).isNotNull();
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
@@ -231,13 +231,13 @@ public class ChunkingTest {
 		assertThat(chunk.getContent()).containsExactly("ff", "ee", "dd", "cc", "bb", "aa");
 		assertThat(chunk.isFirst()).isFalse();
 		assertThat(chunk.isLast()).isTrue();
-		assertThat(chunk.hasPrev()).isTrue();
-		assertThat(chunk.prevChunkable()).isNotNull();
+		assertThat(chunk.hasPrevious()).isTrue();
+		assertThat(chunk.previousChunkable()).isNotNull();
 		assertThat(chunk.hasNext()).isFalse();
 		assertThat(chunk.nextChunkable()).isNull();
 		
 		// DESC chunk2 prev
-		request = chunk.prevChunkable();
+		request = chunk.previousChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.PREV);
 		assertThat(request.getMaxPageSize()).isEqualTo(10);
@@ -247,13 +247,13 @@ public class ChunkingTest {
 		assertThat(chunk.getContent()).containsExactly("pp", "oo", "nn", "mm", "ll", "kk", "jj", "ii", "hh", "gg");
 		assertThat(chunk.isFirst()).isFalse();
 		assertThat(chunk.isLast()).isFalse();
-		assertThat(chunk.hasPrev()).isTrue();
-		assertThat(chunk.prevChunkable()).isNotNull();
+		assertThat(chunk.hasPrevious()).isTrue();
+		assertThat(chunk.previousChunkable()).isNotNull();
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
 		// DESC chunk1 prev
-		request = chunk.prevChunkable();
+		request = chunk.previousChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.PREV);
 		assertThat(request.getMaxPageSize()).isEqualTo(10);
@@ -263,13 +263,13 @@ public class ChunkingTest {
 		assertThat(chunk.getContent()).containsExactly("zz", "yy", "xx", "ww", "vv", "uu", "tt", "ss", "rr", "qq");
 		assertThat(chunk.isFirst()).isFalse(); // unknown
 		assertThat(chunk.isLast()).isFalse();
-		assertThat(chunk.hasPrev()).isTrue(); // unknown
-		assertThat(chunk.prevChunkable()).isNotNull();
+		assertThat(chunk.hasPrevious()).isTrue(); // unknown
+		assertThat(chunk.previousChunkable()).isNotNull();
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
 		// DESC chunk0 prev
-		request = chunk.prevChunkable();
+		request = chunk.previousChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.PREV);
 		assertThat(request.getMaxPageSize()).isEqualTo(10);
@@ -279,8 +279,8 @@ public class ChunkingTest {
 		assertThat(chunk.getContent()).isEmpty();
 		assertThat(chunk.isFirst()).isFalse();
 		assertThat(chunk.isLast()).isTrue();
-		assertThat(chunk.hasPrev()).isFalse();
-		assertThat(chunk.prevChunkable()).isNull();
+		assertThat(chunk.hasPrevious()).isFalse();
+		assertThat(chunk.previousChunkable()).isNull();
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
@@ -295,8 +295,8 @@ public class ChunkingTest {
 		assertThat(chunk.getContent()).containsExactly("zz", "yy", "xx", "ww", "vv", "uu", "tt", "ss", "rr", "qq");
 		assertThat(chunk.isFirst()).isFalse();
 		assertThat(chunk.isLast()).isFalse();
-		assertThat(chunk.hasPrev()).isTrue();
-		assertThat(chunk.prevChunkable()).isNotNull();
+		assertThat(chunk.hasPrevious()).isTrue();
+		assertThat(chunk.previousChunkable()).isNotNull();
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 	}
@@ -315,8 +315,8 @@ public class ChunkingTest {
 				"pp", "oo", "nn", "mm", "ll", "kk", "jj", "ii", "hh", "gg", "ff", "ee", "dd", "cc", "bb", "aa");
 		assertThat(chunk.isFirst()).isTrue();
 		assertThat(chunk.isLast()).isFalse();
-		assertThat(chunk.hasPrev()).isFalse();
-		assertThat(chunk.prevChunkable()).isNull();
+		assertThat(chunk.hasPrevious()).isFalse();
+		assertThat(chunk.previousChunkable()).isNull();
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 	}
@@ -335,8 +335,8 @@ public class ChunkingTest {
 				"pp", "oo", "nn", "mm", "ll", "kk", "jj", "ii", "hh", "gg", "ff", "ee", "dd", "cc", "bb", "aa");
 		assertThat(chunk.isFirst()).isTrue();
 		assertThat(chunk.isLast()).isTrue();
-		assertThat(chunk.hasPrev()).isFalse();
-		assertThat(chunk.prevChunkable()).isNull();
+		assertThat(chunk.hasPrevious()).isFalse();
+		assertThat(chunk.previousChunkable()).isNull();
 		assertThat(chunk.hasNext()).isFalse();
 		assertThat(chunk.nextChunkable()).isNull();
 	}

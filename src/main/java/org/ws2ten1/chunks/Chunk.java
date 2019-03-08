@@ -77,7 +77,7 @@ public interface Chunk<T>extends Collection<T> {
 	 *
 	 * @return if there is a previous {@link Chunk}.
 	 */
-	boolean hasPrev();
+	boolean hasPrevious();
 	
 	/**
 	 * Returns whether the current {@link Chunk} is the last one in current pagination relation.
@@ -109,7 +109,7 @@ public interface Chunk<T>extends Collection<T> {
 	 *
 	 * @return {@link Chunkable}
 	 */
-	Chunkable prevChunkable();
+	Chunkable previousChunkable();
 	
 	/**
 	 * Returns a new {@link Chunk} with the content of the current one mapped by the given {@link Converter}.

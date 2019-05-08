@@ -41,7 +41,7 @@ public class ExampleRepository { // NOPMD - cc
 		.collect(Collectors.toList());
 	
 	
-	public Chunk<String> findAll(Chunkable chunkable) { // NOPMD -@cs[CyclomaticComplexity]
+	public Chunk<String> findAll(Chunkable chunkable) { // NOPMD -@cs[CyclomaticComplexity|NPathComplexity]
 		List<String> source = DATA;
 		
 		Direction direction = chunkable.getDirection();

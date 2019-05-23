@@ -15,6 +15,7 @@
  */
 package org.ws2ten1.chunks;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -23,11 +24,24 @@ import java.util.Optional;
 public interface PaginationTokenEncoder {
 	
 	/**
+	 * Compute pagination token from {@link Chunkable} and contentId {@link List}.
+	 *
+	 * @param chunkable {@link Chunkable} of this chunk
+	 * @param contentIds content IDs
+	 * @return pagination token
+	 */
+	default String computeToken(Chunkable chunkable, List<String> contentIds) {
+		String firstKey = (chunkable.getPaginationToken() == null || contentIds.isEmpty()) ? null : contentIds.get(0);
+		String lastKey = contentIds.isEmpty() ? null : contentIds.get(contentIds.size() - 1);
+		return encode(firstKey, lastKey);
+	}
+	
+	/**
 	 * Encode first key and last key to string.
 	 *
 	 * @param firstKey first element key of current chunk
 	 * @param lastKey last element key of current chunk
-	 * @return token pagination token
+	 * @return pagination token
 	 * @throws InvalidKeyExpressionException if failed to process keys
 	 */
 	String encode(Object firstKey, Object lastKey);

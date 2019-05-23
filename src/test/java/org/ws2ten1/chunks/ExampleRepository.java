@@ -77,10 +77,8 @@ public class ExampleRepository { // NOPMD - cc
 			Collections.reverse(content);
 		}
 		
-		String firstKey = (chunkable.getPaginationToken() == null || content.isEmpty()) ? null : content.get(0);
-		String lastKey = content.isEmpty() ? null : content.get(content.size() - 1);
-		String pt = encoder.encode(firstKey, lastKey);
-		return new ChunkImpl<>(content, pt, chunkable);
+		String paginationToken = encoder.computeToken(chunkable, content);
+		return new ChunkImpl<>(content, paginationToken, chunkable);
 	}
 	
 	private Predicate<? super String> keyFilter(String key, PaginationRelation relation, Direction direction) {

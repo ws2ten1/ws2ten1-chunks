@@ -39,7 +39,7 @@ public class Chunks {
 	 * @return Empty chunk
 	 */
 	@SuppressWarnings("unchecked")
-	public static final <T> Chunk<T> emptyChunk() {
+	public static <T> Chunk<T> emptyChunk() {
 		return EMPTY_CHUNK;
 	}
 }

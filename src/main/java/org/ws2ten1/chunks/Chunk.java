@@ -17,10 +17,8 @@ package org.ws2ten1.chunks;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Stream;
-
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.data.domain.Sort.Direction;
 
 /**
  * A part of item set.
@@ -112,13 +110,13 @@ public interface Chunk<T>extends Collection<T> {
 	Chunkable previousChunkable();
 	
 	/**
-	 * Returns a new {@link Chunk} with the content of the current one mapped by the given {@link Converter}.
+	 * Returns a new {@link Chunk} with the content of the current one mapped by the given {@link Function}.
 	 *
 	 * @param <S> element type of new chunk
-	 * @param converter must not be {@literal null}.
-	 * @return a new {@link Chunk} with the content of the current one mapped by the given {@link Converter}.
+	 * @param mapper must not be {@literal null}.
+	 * @return a new {@link Chunk} with the content of the current one mapped by the given {@link Function}.
 	 */
-	<S> Chunk<S> map(Converter<? super T, ? extends S> converter);
+	<S> Chunk<S> map(Function<? super T, ? extends S> mapper);
 	
 	/**
 	 * Returns the {@link Chunkable} used to retrieve current{@link Chunk}.

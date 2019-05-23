@@ -17,8 +17,6 @@ package org.ws2ten1.chunks;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.springframework.data.domain.Sort.Direction;
-
 import org.junit.Test;
 
 import org.ws2ten1.chunks.Chunkable.PaginationRelation;

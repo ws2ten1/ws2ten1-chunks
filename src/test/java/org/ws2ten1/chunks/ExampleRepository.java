@@ -23,8 +23,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.springframework.data.domain.Sort.Direction;
-
 import org.ws2ten1.chunks.Chunkable.PaginationRelation;
 
 /**

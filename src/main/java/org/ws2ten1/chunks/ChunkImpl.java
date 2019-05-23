@@ -22,17 +22,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.util.Assert;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -70,15 +66,17 @@ public class ChunkImpl<T> implements Chunk<T> {
 	
 	
 	/**
-	 * Creates a new {@link Chunk} with the given content and the given governing {@link Pageable}.
+	 * Creates a new {@link Chunk} with the given content and the given governing
+	 * {@code org.springframework.data.domain.Pageable}.
 	 *
 	 * @param content content, must not be {@literal null}.
 	 * @param paginationToken token, can be {@literal null}.
 	 * @param chunkable can be {@literal null}.
-	 * @since 0.11
 	 */
 	public ChunkImpl(List<T> content, String paginationToken, Chunkable chunkable) {
-		Assert.notNull(content, "Content must not be null!");
+		if (content == null) {
+			throw new IllegalArgumentException("Content must not be null!");
+		}
 		this.content.addAll(content);
 		this.paginationToken = paginationToken;
 		this.chunkable = chunkable;
@@ -158,8 +156,8 @@ public class ChunkImpl<T> implements Chunk<T> {
 	}
 	
 	@Override
-	public <S> Chunk<S> map(Converter<? super T, ? extends S> converter) {
-		return new ChunkImpl<>(getConvertedContent(converter), paginationToken, chunkable);
+	public <S> Chunk<S> map(Function<? super T, ? extends S> mapper) {
+		return new ChunkImpl<>(getConvertedContent(mapper), paginationToken, chunkable);
 	}
 	
 	private boolean isForward() {
@@ -169,15 +167,17 @@ public class ChunkImpl<T> implements Chunk<T> {
 	}
 	
 	/**
-	 * Applies the given {@link Converter} to the content of the {@link Chunk}.
+	 * Applies the given {@link Function} to the content of the {@link Chunk}.
 	 *
-	 * @param converter must not be {@literal null}.
+	 * @param mapper must not be {@literal null}.
 	 * @return mapped content list
 	 * @since 0.11
 	 */
-	protected <S> List<S> getConvertedContent(Converter<? super T, ? extends S> converter) {
-		Assert.notNull(converter, "Converter must not be null!");
-		return content.stream().map(converter::convert).collect(Collectors.toList());
+	protected <S> List<S> getConvertedContent(Function<? super T, ? extends S> mapper) {
+		if (mapper == null) {
+			throw new IllegalArgumentException("mapper must not be null!");
+		}
+		return content.stream().map(mapper).collect(Collectors.toList());
 	}
 	
 	@Override

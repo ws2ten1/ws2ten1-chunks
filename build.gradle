@@ -63,10 +63,8 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'com.fasterxml.jackson.core:jackson-databind'
-	implementation 'org.springframework.data:spring-data-commons'
-	compileOnly 'org.springframework:spring-web' // optional to use ChunkableHandlerMethodArgumentResolver
+	implementation 'org.slf4j:slf4j-api'
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

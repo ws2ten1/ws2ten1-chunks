@@ -15,8 +15,6 @@
  */
 package org.ws2ten1.chunks;
 
-import org.springframework.data.domain.Sort.Direction;
-
 /**
  * Abstract interface for value-based pagination information.
  */

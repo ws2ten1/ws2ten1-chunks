@@ -21,8 +21,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import org.springframework.data.domain.Sort.Direction;
-
 /**
  * Basic Java Bean implementation of {@code Chunkable}.
  */

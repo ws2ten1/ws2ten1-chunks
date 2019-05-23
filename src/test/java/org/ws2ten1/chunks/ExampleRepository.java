@@ -23,8 +23,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.springframework.data.domain.Sort.Direction;
-
 import org.ws2ten1.chunks.Chunkable.PaginationRelation;
 
 /**
@@ -41,7 +39,7 @@ public class ExampleRepository { // NOPMD - cc
 		.collect(Collectors.toList());
 	
 	
-	public Chunk<String> findAll(Chunkable chunkable) { // NOPMD -@cs[CyclomaticComplexity]
+	public Chunk<String> findAll(Chunkable chunkable) { // NOPMD -@cs[CyclomaticComplexity|NPathComplexity]
 		List<String> source = DATA;
 		
 		Direction direction = chunkable.getDirection();

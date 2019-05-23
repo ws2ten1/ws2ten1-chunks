@@ -26,7 +26,7 @@ import java.util.stream.IntStream;
 import org.ws2ten1.chunks.Chunkable.PaginationRelation;
 
 /**
- * Exmaple repository implementation.
+ * Example repository implementation.
  */
 public class ExampleRepository { // NOPMD - cc
 	

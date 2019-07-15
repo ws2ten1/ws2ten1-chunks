@@ -28,7 +28,6 @@ import java.util.stream.Stream;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -45,13 +44,6 @@ import org.ws2ten1.chunks.Chunkable.PaginationRelation;
 	"paginationToken"
 })
 public class ChunkImpl<T> implements Chunk<T> {
-	
-	private static final PaginationTokenEncoder DEFAULT_ENCODER = new SimplePaginationTokenEncoder();
-	
-	@JsonIgnore
-	@Getter
-	@Setter
-	private PaginationTokenEncoder encoder = DEFAULT_ENCODER;
 	
 	@JsonProperty
 	private final List<T> content = new ArrayList<>();

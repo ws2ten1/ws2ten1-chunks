@@ -5,7 +5,8 @@ jobs:
     docker:
       - image: circleci/openjdk:8u181-jdk
     environment:
-      JVM_OPTS: -Xmx3200m
+      JVM_OPTS: -Xmx3G
+      GRADLE_OPTS: -Dorg.gradle.daemon=false
       TERM: dumb
     steps:
       - checkout
@@ -26,6 +27,7 @@ jobs:
           key: v1-{{ .Branch }}-{{ checksum ".circleci/config.yml" }}-{{ checksum "build.gradle" }}-{{ checksum "gradle.properties" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
           paths:
             - ~/.gradle
+            - ~/.m2
       - run:
           name: Run tests
           command: ./gradlew clean check
@@ -33,10 +35,13 @@ jobs:
           name: Store artifacts
           path: build/reports
       - store_test_results:
-          path: build/test-results/
+          path: build/test-results
       - deploy:
-          name: Deploy artifacts
-          command: ./gradlew build bintrayUpload
+          name: Deploy to JFrog Bintray
+          command: |
+            if [ -n "${CIRCLE_TAG}" -a -n "${BINTRAY_USER}" ]; then
+              ./gradlew build bintrayUpload
+            fi
 
 workflows:
   version: 2

@@ -32,8 +32,8 @@ version = gitVersion()
 // ================
 // Build configuration
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 compileJava {
 	options.compilerArgs << "-Werror"

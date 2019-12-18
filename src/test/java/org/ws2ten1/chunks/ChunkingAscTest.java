@@ -18,8 +18,10 @@ package org.ws2ten1.chunks;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
-
-import org.ws2ten1.chunks.Chunkable.PaginationRelation;
+import org.ws2ten1.chunkrequests.ChunkRequest;
+import org.ws2ten1.chunkrequests.Chunkable;
+import org.ws2ten1.chunkrequests.Chunkable.PaginationRelation;
+import org.ws2ten1.chunkrequests.Direction;
 
 /**
  * Test for chunking.

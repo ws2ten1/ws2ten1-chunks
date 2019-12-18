@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+import org.ws2ten1.chunkrequests.Chunkable;
+import org.ws2ten1.chunkrequests.Direction;
+
 /**
  * A part of item set.
  *

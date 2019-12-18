@@ -29,10 +29,13 @@ import java.util.stream.Stream;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+import org.ws2ten1.chunkrequests.ChunkRequest;
+import org.ws2ten1.chunkrequests.Chunkable;
+import org.ws2ten1.chunkrequests.Chunkable.PaginationRelation;
+import org.ws2ten1.chunkrequests.Direction;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import org.ws2ten1.chunks.Chunkable.PaginationRelation;
 
 /**
  * Default information of {@link Chunk}.

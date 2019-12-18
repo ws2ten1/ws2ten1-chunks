@@ -18,6 +18,8 @@ package org.ws2ten1.chunks;
 import java.io.Serializable;
 import java.util.List;
 
+import org.ws2ten1.chunkrequests.Chunkable;
+
 /**
  * Factory interface of {@link Chunk}.
  *

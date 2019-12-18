@@ -23,7 +23,11 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.ws2ten1.chunks.Chunkable.PaginationRelation;
+import org.ws2ten1.chunkrequests.Chunkable;
+import org.ws2ten1.chunkrequests.Chunkable.PaginationRelation;
+import org.ws2ten1.chunkrequests.Direction;
+import org.ws2ten1.chunkrequests.PaginationTokenEncoder;
+import org.ws2ten1.chunkrequests.SimplePaginationTokenEncoder;
 
 /**
  * Example repository implementation.

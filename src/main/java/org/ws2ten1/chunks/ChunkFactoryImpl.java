@@ -21,6 +21,9 @@ import java.util.function.Function;
 
 import lombok.RequiredArgsConstructor;
 
+import org.ws2ten1.chunkrequests.Chunkable;
+import org.ws2ten1.chunkrequests.PaginationTokenEncoder;
+
 /**
  * Default implementation of {@link ChunkFactory}.
  *

@@ -31,7 +31,7 @@ import org.ws2ten1.chunkrequests.PaginationTokenEncoder;
  * @param <ID> type of identifier
  */
 @RequiredArgsConstructor
-public class ChunkFactoryImpl<E, ID extends Serializable> implements ChunkFactory<E, ID> { // -@cs[ClassTypeParameterName]
+public class ChunkFactoryImpl<E, ID extends Serializable & Comparable<ID>> implements ChunkFactory<E, ID> {
 	
 	/**
 	 * Function to extract ID from entity.

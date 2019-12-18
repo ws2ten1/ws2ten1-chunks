@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.ws2ten1.chunkrequests.Chunkable;
+import org.ws2ten1.repositories.ChunkableRepository;
 
 /**
  * Factory interface of {@link Chunk}.
@@ -27,6 +28,10 @@ import org.ws2ten1.chunkrequests.Chunkable;
  * @param <ID> type of identifier
  */
 public interface ChunkFactory<E, ID extends Serializable> { // -@cs[InterfaceTypeParameterName]
+	
+	static <E, ID extends Serializable & Comparable<ID>> ChunkFactory<E, ID> from(ChunkableRepository<E, ID> repo) {
+		return new ChunkFactoryImpl<>(repo.getIdExtractor(), repo.getPaginationTokenEncoder());
+	}
 	
 	/**
 	 * Create new {@link Chunk} from content list and requested {@link Chunkable}.

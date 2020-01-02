@@ -16,7 +16,7 @@ plugins {
 	id 'jacoco'
 	id 'com.github.spotbugs' version '3.0.0'
 	id 'de.thetaphi.forbiddenapis' version '2.7'
-	id 'com.diffplug.gradle.spotless' version '3.26.1'
+	id 'com.diffplug.gradle.spotless' version '3.27.0'
 }
 
 wrapper {

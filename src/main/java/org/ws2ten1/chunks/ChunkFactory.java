@@ -17,29 +17,49 @@ package org.ws2ten1.chunks;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.function.Function;
+
+import lombok.RequiredArgsConstructor;
 
 import org.ws2ten1.chunkrequests.Chunkable;
-import org.ws2ten1.repositories.ChunkableRepository;
+import org.ws2ten1.chunkrequests.DefaultIdExtractor;
+import org.ws2ten1.chunkrequests.PaginationTokenEncoder;
+import org.ws2ten1.chunkrequests.SimplePaginationTokenEncoder;
 
 /**
- * Factory interface of {@link Chunk}.
+ * Factory to create {@link Chunk} from list and {@link Chunkable}.
  *
  * @param <E> type of entity
  * @param <ID> type of identifier
  */
-public interface ChunkFactory<E, ID extends Serializable> { // -@cs[InterfaceTypeParameterName]
-	
-	static <E, ID extends Serializable & Comparable<ID>> ChunkFactory<E, ID> from(ChunkableRepository<E, ID> repo) {
-		return new ChunkFactoryImpl<>(repo.getIdExtractor(), repo.getPaginationTokenEncoder());
-	}
+@RequiredArgsConstructor
+public class ChunkFactory<E, ID extends Serializable & Comparable<ID>> {
 	
 	/**
-	 * Create new {@link Chunk} from content list and requested {@link Chunkable}.
-	 *
-	 * @param content content list
-	 * @param chunkable requested {@link Chunkable}
-	 * @return created {@link Chunk}
+	 * Function to extract ID from entity.
 	 */
-	Chunk<E> createChunk(List<E> content, Chunkable chunkable);
+	private final Function<E, ID> idExtractor;
 	
+	private final PaginationTokenEncoder encoder;
+	
+	
+	public ChunkFactory() {
+		this(new DefaultIdExtractor<>(), new SimplePaginationTokenEncoder());
+	}
+	
+	public Chunk<E> createChunk(List<E> content, Chunkable chunkable) {
+		String paginationToken = null;
+		if (content.isEmpty() == false) {
+			Object firstKey = null;
+			if (chunkable.getPaginationToken() != null && content.isEmpty() == false) {
+				firstKey = idExtractor.apply(content.get(0));
+			}
+			Object lastKey = null;
+			if (content.isEmpty() == false) {
+				lastKey = idExtractor.apply(content.get(content.size() - 1));
+			}
+			paginationToken = encoder.encode(firstKey, lastKey);
+		}
+		return new ChunkImpl<>(content, paginationToken, chunkable);
+	}
 }

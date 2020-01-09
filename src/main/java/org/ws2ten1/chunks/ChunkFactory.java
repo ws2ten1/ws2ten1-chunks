@@ -28,33 +28,30 @@ import org.ws2ten1.chunkrequests.SimplePaginationTokenEncoder;
 
 /**
  * Factory to create {@link Chunk} from list and {@link Chunkable}.
- *
- * @param <E> type of entity
- * @param <ID> type of identifier
  */
 @RequiredArgsConstructor
-public class ChunkFactory<E, ID extends Serializable & Comparable<ID>> {
+public class ChunkFactory {
 	
 	/**
 	 * Function to extract ID from entity.
 	 */
-	private final Function<E, ID> idExtractor;
+	private final Function<? super Object, ? extends Serializable> idExtractor;
 	
 	private final PaginationTokenEncoder encoder;
 	
 	
 	public ChunkFactory() {
-		this(new DefaultIdExtractor<>(), new SimplePaginationTokenEncoder());
+		this(new DefaultIdExtractor(), new SimplePaginationTokenEncoder());
 	}
 	
-	public Chunk<E> createChunk(List<E> content, Chunkable chunkable) {
+	public <E> Chunk<E> createChunk(List<E> content, Chunkable chunkable) {
 		String paginationToken = null;
 		if (content.isEmpty() == false) {
-			Object firstKey = null;
+			Serializable firstKey = null;
 			if (chunkable.getPaginationToken() != null && content.isEmpty() == false) {
 				firstKey = idExtractor.apply(content.get(0));
 			}
-			Object lastKey = null;
+			Serializable lastKey = null;
 			if (content.isEmpty() == false) {
 				lastKey = idExtractor.apply(content.get(content.size() - 1));
 			}

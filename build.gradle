@@ -52,7 +52,7 @@ dependencies {
 	implementation 'com.fasterxml.jackson.core:jackson-databind'
 	implementation 'org.slf4j:slf4j-api'
 
-	api 'org.ws2ten1:ws2ten1-repositories:1.0.0-rc18'
+	api 'org.ws2ten1:ws2ten1-repositories:1.0.0-rc19'
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

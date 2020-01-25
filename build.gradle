@@ -55,7 +55,7 @@ dependencies {
 	implementation 'org.slf4j:slf4j-api'
 	implementation 'com.fasterxml.jackson.core:jackson-databind'
 
-	api 'com.github.polycreo:polycreo-chunkrequest:661c6c905c'
+	api 'com.github.polycreo:polycreo-chunkrequest:13249bf45f'
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

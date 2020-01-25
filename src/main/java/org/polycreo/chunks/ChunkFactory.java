@@ -41,7 +41,7 @@ public class ChunkFactory {
 	
 	
 	public ChunkFactory() {
-		this(new DefaultIdExtractor(), new SimplePaginationTokenEncoder());
+		this(new DefaultIdExtractor<>(), new SimplePaginationTokenEncoder());
 	}
 	
 	public <E> Chunk<E> createChunk(List<E> content, Chunkable chunkable) {

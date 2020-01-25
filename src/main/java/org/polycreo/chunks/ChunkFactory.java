@@ -22,9 +22,9 @@ import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
 
 import org.polycreo.chunkrequests.Chunkable;
-import org.polycreo.chunkrequests.DefaultIdExtractor;
 import org.polycreo.chunkrequests.PaginationTokenEncoder;
 import org.polycreo.chunkrequests.SimplePaginationTokenEncoder;
+import org.polycreo.id.DefaultIdExtractor;
 
 /**
  * Factory to create {@link Chunk} from list and {@link Chunkable}.
@@ -41,7 +41,7 @@ public class ChunkFactory {
 	
 	
 	public ChunkFactory() {
-		this(new DefaultIdExtractor<>(), new SimplePaginationTokenEncoder());
+		this(new DefaultIdExtractor(), new SimplePaginationTokenEncoder());
 	}
 	
 	public <E> Chunk<E> createChunk(List<E> content, Chunkable chunkable) {

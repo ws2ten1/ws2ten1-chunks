@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ws2ten1.chunks;
+package org.polycreo.chunks;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,10 +29,10 @@ import java.util.stream.Stream;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-import org.ws2ten1.chunkrequests.ChunkRequest;
-import org.ws2ten1.chunkrequests.Chunkable;
-import org.ws2ten1.chunkrequests.Chunkable.PaginationRelation;
-import org.ws2ten1.chunkrequests.Direction;
+import org.polycreo.chunkrequests.ChunkRequest;
+import org.polycreo.chunkrequests.Chunkable;
+import org.polycreo.chunkrequests.Chunkable.PaginationRelation;
+import org.polycreo.chunkrequests.Direction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

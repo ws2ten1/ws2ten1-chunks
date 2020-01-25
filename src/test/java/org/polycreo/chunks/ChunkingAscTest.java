@@ -13,35 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ws2ten1.chunks;
+package org.polycreo.chunks;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
-import org.ws2ten1.chunkrequests.ChunkRequest;
-import org.ws2ten1.chunkrequests.Chunkable;
-import org.ws2ten1.chunkrequests.Chunkable.PaginationRelation;
-import org.ws2ten1.chunkrequests.Direction;
+import org.polycreo.chunkrequests.ChunkRequest;
+import org.polycreo.chunkrequests.Chunkable;
+import org.polycreo.chunkrequests.Chunkable.PaginationRelation;
+import org.polycreo.chunkrequests.Direction;
 
 /**
  * Test for chunking.
  */
-public class ChunkingDescTest {
+public class ChunkingAscTest {
 	
 	private ExampleRepository repo = new ExampleRepository();
 	
 	
 	@Test
-	public void testChunkDESC_Under26() {
-		// DESC chunk1 by first
-		Chunkable request = new ChunkRequest(10, Direction.DESC);
+	public void testChunkASC_Under26() {
+		// ASC chunk1 by first
+		Chunkable request = new ChunkRequest(10, Direction.ASC);
 		assertThat(request.getPaginationToken()).isNull();
 		assertThat(request.getPaginationRelation()).isNull();
 		assertThat(request.getMaxPageSize()).isEqualTo(10);
-		assertThat(request.getDirection()).isEqualTo(Direction.DESC);
+		assertThat(request.getDirection()).isEqualTo(Direction.ASC);
 		
 		Chunk<String> chunk = repo.findAll(request);
-		assertThat(chunk.getContent()).containsExactly("zz", "yy", "xx", "ww", "vv", "uu", "tt", "ss", "rr", "qq");
+		assertThat(chunk.getContent()).containsExactly("aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj");
 		assertThat(chunk.isFirst()).isTrue();
 		assertThat(chunk.isLast()).isFalse();
 		assertThat(chunk.hasPrevious()).isFalse();
@@ -49,15 +49,15 @@ public class ChunkingDescTest {
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
-		// DESC chunk2 by next from chunk1
+		// ASC chunk2 by next from chunk1
 		request = chunk.nextChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.NEXT);
 		assertThat(request.getMaxPageSize()).isEqualTo(10);
-		assertThat(request.getDirection()).isEqualTo(Direction.DESC);
+		assertThat(request.getDirection()).isEqualTo(Direction.ASC);
 		
 		chunk = repo.findAll(request);
-		assertThat(chunk.getContent()).containsExactly("pp", "oo", "nn", "mm", "ll", "kk", "jj", "ii", "hh", "gg");
+		assertThat(chunk.getContent()).containsExactly("kk", "ll", "mm", "nn", "oo", "pp", "qq", "rr", "ss", "tt");
 		assertThat(chunk.isFirst()).isFalse();
 		assertThat(chunk.isLast()).isFalse();
 		assertThat(chunk.hasPrevious()).isTrue();
@@ -65,15 +65,15 @@ public class ChunkingDescTest {
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
-		// DESC chunk3 by next from chunk2
+		// ASC chunk3 by next from chunk2
 		request = chunk.nextChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.NEXT);
 		assertThat(request.getMaxPageSize()).isEqualTo(10);
-		assertThat(request.getDirection()).isEqualTo(Direction.DESC);
+		assertThat(request.getDirection()).isEqualTo(Direction.ASC);
 		
 		chunk = repo.findAll(request);
-		assertThat(chunk.getContent()).containsExactly("ff", "ee", "dd", "cc", "bb", "aa");
+		assertThat(chunk.getContent()).containsExactly("uu", "vv", "ww", "xx", "yy", "zz");
 		assertThat(chunk.isFirst()).isFalse();
 		assertThat(chunk.isLast()).isTrue();
 		assertThat(chunk.hasPrevious()).isTrue();
@@ -81,15 +81,15 @@ public class ChunkingDescTest {
 		assertThat(chunk.hasNext()).isFalse();
 		assertThat(chunk.nextChunkable()).isNull();
 		
-		// DESC chunk2 by prev from chunk3
+		// ASC chunk2 by prev from chunk3
 		request = chunk.previousChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.PREV);
 		assertThat(request.getMaxPageSize()).isEqualTo(10);
-		assertThat(request.getDirection()).isEqualTo(Direction.DESC);
+		assertThat(request.getDirection()).isEqualTo(Direction.ASC);
 		
 		chunk = repo.findAll(request);
-		assertThat(chunk.getContent()).containsExactly("pp", "oo", "nn", "mm", "ll", "kk", "jj", "ii", "hh", "gg");
+		assertThat(chunk.getContent()).containsExactly("kk", "ll", "mm", "nn", "oo", "pp", "qq", "rr", "ss", "tt");
 		assertThat(chunk.isFirst()).isFalse();
 		assertThat(chunk.isLast()).isFalse();
 		assertThat(chunk.hasPrevious()).isTrue();
@@ -97,15 +97,15 @@ public class ChunkingDescTest {
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
-		// DESC chunk1 by prev from chunk2
+		// ASC chunk1 by prev from chunk2
 		request = chunk.previousChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.PREV);
 		assertThat(request.getMaxPageSize()).isEqualTo(10);
-		assertThat(request.getDirection()).isEqualTo(Direction.DESC);
+		assertThat(request.getDirection()).isEqualTo(Direction.ASC);
 		
 		chunk = repo.findAll(request);
-		assertThat(chunk.getContent()).containsExactly("zz", "yy", "xx", "ww", "vv", "uu", "tt", "ss", "rr", "qq");
+		assertThat(chunk.getContent()).containsExactly("aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj");
 		assertThat(chunk.isFirst()).isFalse(); // unknown
 		assertThat(chunk.isLast()).isFalse();
 		assertThat(chunk.hasPrevious()).isTrue(); // unknown
@@ -113,12 +113,12 @@ public class ChunkingDescTest {
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
-		// DESC chunk0 by prev from chunk1
+		// ASC chunk0 by prev from chunk1
 		request = chunk.previousChunkable();
 		assertThat(request.getPaginationToken()).isEqualTo(chunk.getPaginationToken());
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.PREV);
 		assertThat(request.getMaxPageSize()).isEqualTo(10);
-		assertThat(request.getDirection()).isEqualTo(Direction.DESC);
+		assertThat(request.getDirection()).isEqualTo(Direction.ASC);
 		
 		chunk = repo.findAll(request);
 		assertThat(chunk.getContent()).isEmpty();
@@ -134,10 +134,10 @@ public class ChunkingDescTest {
 		assertThat(request.getPaginationToken()).isNotNull();
 		assertThat(request.getPaginationRelation()).isEqualTo(PaginationRelation.NEXT);
 		assertThat(request.getMaxPageSize()).isEqualTo(10);
-		assertThat(request.getDirection()).isEqualTo(Direction.DESC);
+		assertThat(request.getDirection()).isEqualTo(Direction.ASC);
 		
 		chunk = repo.findAll(request);
-		assertThat(chunk.getContent()).containsExactly("zz", "yy", "xx", "ww", "vv", "uu", "tt", "ss", "rr", "qq");
+		assertThat(chunk.getContent()).containsExactly("aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj");
 		assertThat(chunk.isFirst()).isFalse();
 		assertThat(chunk.isLast()).isFalse();
 		assertThat(chunk.hasPrevious()).isTrue();
@@ -147,17 +147,17 @@ public class ChunkingDescTest {
 	}
 	
 	@Test
-	public void testChunkDESC_Exact26() {
-		// DESC chunk1 by first
-		Chunkable request = new ChunkRequest(26, Direction.DESC);
+	public void testChunkASC_Exact26() {
+		// ASC chunk1 by first
+		Chunkable request = new ChunkRequest(26, Direction.ASC);
 		assertThat(request.getPaginationToken()).isNull();
 		assertThat(request.getPaginationRelation()).isNull();
 		assertThat(request.getMaxPageSize()).isEqualTo(26);
-		assertThat(request.getDirection()).isEqualTo(Direction.DESC);
+		assertThat(request.getDirection()).isEqualTo(Direction.ASC);
 		
 		Chunk<String> chunk = repo.findAll(request);
-		assertThat(chunk.getContent()).containsExactly("zz", "yy", "xx", "ww", "vv", "uu", "tt", "ss", "rr", "qq",
-				"pp", "oo", "nn", "mm", "ll", "kk", "jj", "ii", "hh", "gg", "ff", "ee", "dd", "cc", "bb", "aa");
+		assertThat(chunk.getContent()).containsExactly("aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj",
+				"kk", "ll", "mm", "nn", "oo", "pp", "qq", "rr", "ss", "tt", "uu", "vv", "ww", "xx", "yy", "zz");
 		assertThat(chunk.isFirst()).isTrue();
 		assertThat(chunk.isLast()).isFalse();
 		assertThat(chunk.hasPrevious()).isFalse();
@@ -165,7 +165,7 @@ public class ChunkingDescTest {
 		assertThat(chunk.hasNext()).isTrue();
 		assertThat(chunk.nextChunkable()).isNotNull();
 		
-		// DESC chunk2 by next from chunk1
+		// ASC chunk2 by next from chunk1
 		request = chunk.nextChunkable();
 		chunk = repo.findAll(request);
 		assertThat(chunk.getContent()).isEmpty();
@@ -176,11 +176,11 @@ public class ChunkingDescTest {
 		assertThat(chunk.hasNext()).isFalse();
 		assertThat(chunk.nextChunkable()).isNull();
 		
-		// DESC chunk1 by prev from chunk2
+		// ASC chunk1 by prev from chunk2
 		request = chunk.previousChunkable();
 		chunk = repo.findAll(request);
-		assertThat(chunk.getContent()).containsExactly("zz", "yy", "xx", "ww", "vv", "uu", "tt", "ss", "rr", "qq",
-				"pp", "oo", "nn", "mm", "ll", "kk", "jj", "ii", "hh", "gg", "ff", "ee", "dd", "cc", "bb", "aa");
+		assertThat(chunk.getContent()).containsExactly("aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj",
+				"kk", "ll", "mm", "nn", "oo", "pp", "qq", "rr", "ss", "tt", "uu", "vv", "ww", "xx", "yy", "zz");
 		assertThat(chunk.isFirst()).isFalse();
 		assertThat(chunk.isLast()).isFalse();
 		assertThat(chunk.hasPrevious()).isTrue();
@@ -190,17 +190,17 @@ public class ChunkingDescTest {
 	}
 	
 	@Test
-	public void testChunkDESC_Over26() {
+	public void testChunkASC_Over26() {
 		// ASC chunk1 by first
-		Chunkable request = new ChunkRequest(30, Direction.DESC);
+		Chunkable request = new ChunkRequest(30, Direction.ASC);
 		assertThat(request.getPaginationToken()).isNull();
 		assertThat(request.getPaginationRelation()).isNull();
 		assertThat(request.getMaxPageSize()).isEqualTo(30);
-		assertThat(request.getDirection()).isEqualTo(Direction.DESC);
+		assertThat(request.getDirection()).isEqualTo(Direction.ASC);
 		
 		Chunk<String> chunk = repo.findAll(request);
-		assertThat(chunk.getContent()).containsExactly("zz", "yy", "xx", "ww", "vv", "uu", "tt", "ss", "rr", "qq",
-				"pp", "oo", "nn", "mm", "ll", "kk", "jj", "ii", "hh", "gg", "ff", "ee", "dd", "cc", "bb", "aa");
+		assertThat(chunk.getContent()).containsExactly("aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj",
+				"kk", "ll", "mm", "nn", "oo", "pp", "qq", "rr", "ss", "tt", "uu", "vv", "ww", "xx", "yy", "zz");
 		assertThat(chunk.isFirst()).isTrue();
 		assertThat(chunk.isLast()).isTrue();
 		assertThat(chunk.hasPrevious()).isFalse();

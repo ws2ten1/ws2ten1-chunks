@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ws2ten1.chunks;
+package org.polycreo.chunks;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,11 +23,11 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.ws2ten1.chunkrequests.Chunkable;
-import org.ws2ten1.chunkrequests.Chunkable.PaginationRelation;
-import org.ws2ten1.chunkrequests.Direction;
-import org.ws2ten1.chunkrequests.PaginationTokenEncoder;
-import org.ws2ten1.chunkrequests.SimplePaginationTokenEncoder;
+import org.polycreo.chunkrequests.Chunkable;
+import org.polycreo.chunkrequests.Chunkable.PaginationRelation;
+import org.polycreo.chunkrequests.Direction;
+import org.polycreo.chunkrequests.PaginationTokenEncoder;
+import org.polycreo.chunkrequests.SimplePaginationTokenEncoder;
 
 /**
  * Example repository implementation.

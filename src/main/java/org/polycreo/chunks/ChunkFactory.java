@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ws2ten1.chunks;
+package org.polycreo.chunks;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,10 +21,10 @@ import java.util.function.Function;
 
 import lombok.RequiredArgsConstructor;
 
-import org.ws2ten1.chunkrequests.Chunkable;
-import org.ws2ten1.chunkrequests.DefaultIdExtractor;
-import org.ws2ten1.chunkrequests.PaginationTokenEncoder;
-import org.ws2ten1.chunkrequests.SimplePaginationTokenEncoder;
+import org.polycreo.chunkrequests.Chunkable;
+import org.polycreo.chunkrequests.DefaultIdExtractor;
+import org.polycreo.chunkrequests.PaginationTokenEncoder;
+import org.polycreo.chunkrequests.SimplePaginationTokenEncoder;
 
 /**
  * Factory to create {@link Chunk} from list and {@link Chunkable}.

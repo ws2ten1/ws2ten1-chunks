@@ -26,7 +26,7 @@ wrapper {
 // ================
 // Project metadata configuration
 
-group = 'org.ws2ten1'
+group = 'org.polycreo'
 version = gitVersion()
 
 // ================
@@ -45,14 +45,14 @@ apply plugin: 'io.spring.dependency-management'
 repositories {
 	jcenter()
 	mavenCentral()
-	maven { url 'https://dl.bintray.com/ws2ten1/maven-release' }
+	maven { url 'https://dl.bintray.com/polycreo/maven' }
 }
 
 dependencies {
 	implementation 'com.fasterxml.jackson.core:jackson-databind'
 	implementation 'org.slf4j:slf4j-api'
 
-	api 'org.ws2ten1:ws2ten1-repositories:1.0.0-rc19'
+	api 'org.polycreo:polycreo-repositories:1.0.0-rc19'
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

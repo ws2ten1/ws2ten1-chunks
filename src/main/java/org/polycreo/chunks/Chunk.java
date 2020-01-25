@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ws2ten1.chunks;
+package org.polycreo.chunks;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import org.ws2ten1.chunkrequests.Chunkable;
-import org.ws2ten1.chunkrequests.Direction;
+import org.polycreo.chunkrequests.Chunkable;
+import org.polycreo.chunkrequests.Direction;
 
 /**
  * A part of item set.

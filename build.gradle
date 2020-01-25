@@ -38,8 +38,8 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 compileJava {
-	options.compilerArgs << "-Werror"
-	options.compilerArgs << "-Xlint:all" << "-Xlint:-processing" << "-Xlint:-deprecation"
+	options.compilerArgs << '-Werror'
+	options.compilerArgs << '-Xlint:all' << '-Xlint:-processing' << '-Xlint:-deprecation'
 }
 
 apply plugin: 'io.spring.dependency-management'
